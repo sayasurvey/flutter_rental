@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: AppBar(title: const Text('ログイン')),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(30),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -70,20 +70,23 @@ class _LoginScreenState extends State<LoginScreen> {
                   });
                 },
               ),
-              ElevatedButton(
-                child: const Text('ログイン'),
-                onPressed: () async {
-                  try {
-                    final User? user = (await FirebaseAuth.instance.signInWithEmailAndPassword(
-                        email: _email, password: _password))
-                        .user;
-                    if (user != null) {
-                      print("ログインしました ${user.email} , ${user.uid}");
+              Padding(
+                padding: const EdgeInsets.only(top: 40, bottom: 20),
+                child: ElevatedButton(
+                  child: const Text('ログイン'),
+                  onPressed: () async {
+                    try {
+                      final User? user = (await FirebaseAuth.instance.signInWithEmailAndPassword(
+                          email: _email, password: _password))
+                          .user;
+                      if (user != null) {
+                        print("ログインしました ${user.email} , ${user.uid}");
+                      }
+                    } catch (e) {
+                      print(e);
                     }
-                  } catch (e) {
-                    print(e);
-                  }
-                },
+                  },
+                ),
               ),
               TextButton(
                 child: const Text('ユーザ登録画面へ'),
@@ -143,20 +146,23 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                   });
                 },
               ),
-              ElevatedButton(
-                child: const Text('ユーザ登録'),
-                onPressed: () async {
-                  try {
-                    final User? user = (await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                        email: _email, password: _password))
-                        .user;
-                    if (user != null) {
-                      print("ユーザ登録しました ${user.email} , ${user.uid}");
+              Padding(
+                padding: const EdgeInsets.only(top: 40, bottom: 20),
+                child: ElevatedButton(
+                  child: const Text('ユーザ登録'),
+                  onPressed: () async {
+                    try {
+                      final User? user = (await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                          email: _email, password: _password))
+                          .user;
+                      if (user != null) {
+                        print("ユーザ登録しました ${user.email} , ${user.uid}");
+                      }
+                    } catch (e) {
+                      print(e);
                     }
-                  } catch (e) {
-                    print(e);
-                  }
-                },
+                  },
+                ),
               ),
               TextButton(
                 child: const Text('ログイン画面へ'),
@@ -200,16 +206,19 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   });
                 },
               ),
-              ElevatedButton(
-                child: const Text('パスワードリセット'),
-                onPressed: () async {
-                  try {
-                    await FirebaseAuth.instance.sendPasswordResetEmail(email: _email);
-                    print("パスワードリセット用のメールを送信しました");
-                  } catch (e) {
-                    print(e);
-                  }
-                },
+              Padding(
+                padding: const EdgeInsets.only(top: 40, bottom: 20),
+                child: ElevatedButton(
+                  child: const Text('パスワードリセット'),
+                  onPressed: () async {
+                    try {
+                      await FirebaseAuth.instance.sendPasswordResetEmail(email: _email);
+                      print("パスワードリセット用のメールを送信しました");
+                    } catch (e) {
+                      print(e);
+                    }
+                  },
+                ),
               ),
               TextButton(
                 child: const Text('ログイン画面へ'),
